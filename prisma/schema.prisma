@@ -1,0 +1,18 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DBCONNECTIONS_URL")
+}
+
+model Batch {
+  id            Int      @id @default(autoincrement())
+  model         String
+  licenseLevel  Int
+  quantity      Int
+  date          DateTime
+  comments      String?
+  serialNumber  String
+}
+
+generator client {
+  provider = "prisma-client-js"
+}

@@ -1,0 +1,14 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:14-alpine
+    container_name: fcldb
+    volumes:
+      - ~/apps/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=fcluser
+      - POSTGRES_USER=fcluser
+      - POSTGRES_DB=fcldb
+    ports:
+      - 5432:5432
