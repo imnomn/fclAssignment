@@ -16,8 +16,6 @@ function generateSerialNumber() {
  
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-
-  if (req.method === 'POST') {
     try {
       const { model, licenseLevel, quantity, date } = req.body;
 
@@ -36,7 +34,4 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       console.error(error);
       res.status(500).json({ success: false, error: 'Internal Server Error' });
     }
-  } else {
-    res.status(405).json({ success: false, error: 'Method Not Allowed' });
-  }
 }
