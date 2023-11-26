@@ -21,18 +21,19 @@ const Form: React.FC = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: name === 'quantity' ? parseInt(value, 10) : value }));
+    setFormData((prevData) => ({ ...prevData, [name]: name === 'quantity' || name === 'licenseLevel' ? parseInt(value, 10) :  value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    // console.log(new Date(formData.date).toISOString(), 'formdata')
     try {
       const response = await fetch('api/formSubmission', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({...formData, date: new Date(formData.date).toISOString()}),
       });
   
       if (response.ok) {
